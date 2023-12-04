@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+
+    <title>Weather For You</title>
+    <style>
+        /* Your existing CSS styles */
+        @keyframes blink {
+            0% {
+                opacity: 0;
+            }
+            20%{
+                opacity: 0;
+            }
+            50% {
+                opacity: 0;
+            }
+            75%{
+                opacity:1
+            }
+            100% {
+                opacity: 2;
+            }
+        }
+
+        .animate-blink {
+            animation-name: blink;
+            animation-duration: 1s;
+            animation-iteration-count: infinite;
+        }
+            /* Text typing animation */
+            @keyframes typing {
+                from {
+                    width: 0;
+                }
+                to {
+                    width: 100%;
+                }
+            }
+    
+            /* Apply the blinking cursor animation to .cursor */
+            .cursor {
+                display: inline-block;
+                width: 0.15em;
+                animation: blink 10s infinite;
+                background-color: rgb(254, 254, 254);
+            }
+    
+            /* Apply the typing animation to .typing-text */
+            .typing-text {
+                overflow: hidden;
+                white-space: nowrap;
+                animation: typing 4s steps(40) infinite;
+                
+                border-right: 0.15em solid rgb(0, 0, 0);
+            }
+        /* Additional styles for form alignment */
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        input[type="text"]{
+            margin-bottom: 30px;
+            margin-top: 50px;
+            padding: 10px;
+            border: 1px solid rgb(0, 0, 0);
+            width: 30%;
+        }
+        input[type="text"]:hover{
+            margin-bottom: 30px;
+            margin-top: 50px;
+            padding: 10px;
+            border: 2px solid rgb(255, 255, 255);
+            width: 30%;
+        }
+        button {
+            margin-bottom: 10px;
+            padding: 8px;
+            width: 30%;
+            cursor:pointer;
+        }
+    </style>
+</head>
+<body>
+<div class="w-full h-full flex">
+    <div class="w-1/2 bg-gradient-to-r from-blue-700 to-blue-200 h-screen relative">
+        <!-- Your existing content -->
+        <div class="flex justify-center mx-auto mx-20">
+            <h2 class="text-4xl tracking-wider font-bold text-white mt-20 ">Weather</h2>
+            <h2 class="text-4xl tracking-wider font-bold text-Black mt-20 mx-5">App</h2>
+        </div>
+        <div>
+            <h2 class="absolute text-6xl font-bold text-white top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 typing-text">Find the weather<span class="cursor"></span></h2>
+            <form method="get" class="text-center"> <!-- Added class "text-center" for form alignment -->
+                <input type="text" id="city_name" name="city_name" placeholder="Type any places">
+                <button class="bg-black hover:bg-white hover:text-black hover:font-bold text-white font-bold py-3 px-6 rounded" type="submit"><span class="fas fa-cloud-sun mx-5"></span>FIND</button>
+            </form>
+        </div>
+    </div>
+    <div class="w-1/2 bg-white-500 h-screen">
+        {% if weather %}
+            <h3>{{ weather.region }}</h3>
+            <h3>{{ weather.temperature }}</h3>
+        {% endif %}
+    </div>
+</div>
+<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places"></script>
+
+</body>
+</html>
