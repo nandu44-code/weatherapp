@@ -26,7 +26,7 @@ def homepage(request):
         from bs4 import BeautifulSoup
         soup = BeautifulSoup(html_content,'html.parser')
         
-        weather['region'] = soup.find('span',attrs={'class': 'BBwThe'})
+        weather['region'] = soup.find('span',attrs={'id': 'wob_tm'})
         # weather['temperature'] = soup.find('span',attrs={'class':'wob_tm'})
         print(weather)
     return render(request,'home.html',weather)
